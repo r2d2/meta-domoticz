@@ -1,0 +1,2 @@
+MAILTO=domoticz
+10 06 * * * domoticz /etc/domoticz/edftempo.sh 2>&1 >> /dev/null

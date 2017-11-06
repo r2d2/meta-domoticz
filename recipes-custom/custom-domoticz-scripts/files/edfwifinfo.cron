@@ -1,0 +1,2 @@
+MAILTO=domoticz
+* * * * * domoticz  /etc/domoticz/edfwifinfo.sh 2>&1 >> /dev/null
