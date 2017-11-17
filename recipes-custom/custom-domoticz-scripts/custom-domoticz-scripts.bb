@@ -4,9 +4,7 @@ PR="r0"
 
 # No information for SRC_URI yet (only an external source tree was specified)
 SRC_URI = " \
-	file://edftempo.sh   \
 	file://edfwifinfo.sh \
-	file://edftempo.cron   \
         file://edfwifinfo.cron \
 	"
 RDEPENDS_${PN} = " curl jq domoticz cronie" 

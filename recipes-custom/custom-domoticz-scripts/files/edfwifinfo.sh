@@ -1,7 +1,8 @@
 #!/bin/sh
 
 dev_papp=1126
-dev_demain=1063
+dev_tarif=5
+dev_tarif_demain=1063
 
 TELEINFO=$(curl -s 192.168.1.96/json)
 PAPP=$(echo $TELEINFO | jq '.PAPP' )
@@ -12,9 +13,16 @@ BBRHCJW=$(echo $TELEINFO | jq '.BBRHCJW')
 BBRHPJW=$(echo $TELEINFO | jq '.BBRHPJW')
 BBRHCJR=$(echo $TELEINFO | jq '.BBRHCJR')
 BBRHPJR=$(echo $TELEINFO | jq '.BBRHPJR')
+PTEC=$(echo $TELEINFO | jq '.PTEC')
+
 ENERGY=$(($BBRHCJB+$BBRHPJB+$BBRHCJW+$BBRHPJW+$BBRHCJR+$BBRHPJR-184756488))
 
 #echo "string:" $TELEINFO 
+
+#remove double quotes
+DEMAIN=$(eval echo $DEMAIN)
+PTEC=$(eval echo $PTEC)
+
 
 function send_data {
 dev=$1
@@ -36,5 +44,5 @@ fi
 }
 
 send_data $dev_papp "$PAPP" "$ENERGY" 
-send_data $dev_demain "$DEMAIN"
-
+send_data $dev_tarif "$PTEC"
+send_data $dev_tarif_demain "$DEMAIN"
