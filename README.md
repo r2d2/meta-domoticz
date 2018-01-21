@@ -32,23 +32,29 @@ yocto build tree, you can add it to the build system by adding the
 location of the domoticz layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
+Add this in 'bblayers.conf' :
+```
   BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
     /path/to/yocto/meta-yocto-bsp \
     /path/to/yocto/meta-domoticz \
     "
+```
 
-Add the domoticz to the final generated image :
+Add this in the 'local.conf' file :
+
+```
+# Add the domoticz to the final generated image :
 
   IMAGE_INSTALL_append = " domoticz"
 
-Additionnal customizations can be installed (optional) :
+# Additionnal customizations can be installed (optional) :
 
   IMAGE_INSTALL_append = " custom-domoticz-scripts custom-iptables-rules"
+```
 
-
-# II. recipes description 
+# II. recipes description
 
 ## recipes-core/domoticz
 
@@ -57,11 +63,11 @@ Additionnal customizations can be installed (optional) :
 ## recipes-core/domoticz-initscript
 
   Initscript (systemd based) to launch domoticz.
-  creates a dedicated user & group 
+  creates a dedicated user & group
 
 ## recipes-custom/custom-domoticz-scripts
 
-  Adds my custom scripts : 
+  Adds my custom scripts :
   - get the edf tempo color for next day
   - read the values of the electrical counter (using WiFinfo - https://hallard.me/wifinfo/)
 
@@ -75,4 +81,3 @@ Additionnal customizations can be installed (optional) :
 ## recipes-custom/jq
 
   Add the jq tool, used by the custom-domoticz-scripts recipe, to parse json (see https://stedolan.github.io/jq/)
-
