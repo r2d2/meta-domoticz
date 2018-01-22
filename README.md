@@ -45,13 +45,15 @@ Add this in 'bblayers.conf' :
 Add this in the 'local.conf' file :
 
 ```
-# Add the domoticz to the final generated image :
+# Enable systemd init system
+DISTRO_FEATURES_append = " systemd"
 
-  IMAGE_INSTALL_append = " domoticz"
+# Add the domoticz to the final generated image :
+IMAGE_INSTALL_append = " domoticz"
 
 # Additionnal customizations can be installed (optional) :
+IMAGE_INSTALL_append = " custom-domoticz-scripts custom-iptables-rules"
 
-  IMAGE_INSTALL_append = " custom-domoticz-scripts custom-iptables-rules"
 ```
 
 # II. recipes description

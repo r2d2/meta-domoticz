@@ -41,18 +41,14 @@ S = "${WORKDIR}/git"
 DEPENDS = "curl openssl boost zlib python3"
 RDEPENDS_${PN} = " curl python3"
 
-inherit cmake python-dir pkgconfig
+inherit cmake python-dir pkgconfig systemd useradd
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE = " -DCMAKE_INSTALL_PREFIX=/home/domoticz"
 
 FILES_${PN} += "/home/domoticz/*"
 
-inherit systemd
-
 SYSTEMD_SERVICE_${PN} = "domoticz.service"
-
-inherit useradd
 
 USERADD_PACKAGES = "${PN}"
 
