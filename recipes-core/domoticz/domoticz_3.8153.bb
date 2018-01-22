@@ -23,7 +23,10 @@ LIC_FILES_CHKSUM = "file://License.txt;md5=d32239bcb673463ab874e80d47fae504 \
                     file://MQTT/LICENSE.txt;md5=62ddc846179e908dc0c8efec4a42ef20 \
                     file://hardware/telldus-core/LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/domoticz/domoticz.git;protocol=https"
+SRC_URI = " \
+  git://github.com/domoticz/domoticz.git;protocol=https \
+	file://domoticz.service   \
+	"
 
 # Modify these as desired
 PV = "3.8153${SRCPV}"
@@ -36,7 +39,7 @@ S = "${WORKDIR}/git"
 # NOTE: the following library dependencies are unknown, ignoring: usb libmosquittopp libopenzwave libudev md libexecinfo libtelldus-core
 #       (this is based on recipes that have previously been built and packaged)
 DEPENDS = "curl openssl boost zlib python3"
-RDEPENDS_${PN} = " curl python3 domoticz-initscript" 
+RDEPENDS_${PN} = " curl python3"
 
 inherit cmake python-dir pkgconfig
 
@@ -44,6 +47,10 @@ inherit cmake python-dir pkgconfig
 EXTRA_OECMAKE = " -DCMAKE_INSTALL_PREFIX=/home/domoticz"
 
 FILES_${PN} += "/home/domoticz/*"
+
+inherit systemd
+
+SYSTEMD_SERVICE_${PN} = "domoticz.service"
 
 inherit useradd
 
@@ -54,9 +61,8 @@ USERADD_PARAM_${PN} = "-u 1200 -d /home/domoticz -r -s /bin/sh -P 'domoticz' -g 
 GROUPADD_PARAM_${PN} = "-g 880 domoticz"
 
 do_install_append () {
-
+  install -d ${D}${systemd_unitdir}/system/
+  install -m 0644 ${WORKDIR}/domoticz.service  ${D}${systemd_unitdir}/system
 	chown -R domoticz ${D}/home/domoticz
 	chgrp -R domoticz ${D}/home/domoticz
 }
-
-

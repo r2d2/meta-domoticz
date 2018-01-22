@@ -58,12 +58,11 @@ Add this in the 'local.conf' file :
 
 ## recipes-core/domoticz
 
-  The core component of domoticz
+  The core component of domoticz.
+  Also :
+  * Adds initscript (systemd based) to launch domoticz.
+  * Creates a dedicated user & group
 
-## recipes-core/domoticz-initscript
-
-  Initscript (systemd based) to launch domoticz.
-  creates a dedicated user & group
 
 ## recipes-custom/custom-domoticz-scripts
 
