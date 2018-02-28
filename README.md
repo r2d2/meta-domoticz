@@ -13,7 +13,6 @@ This layer depends on:
   layers: meta
   branch: poky
 
-
 # Patches
 
 Please submit any patches against the domoticz layer to the
@@ -51,9 +50,6 @@ DISTRO_FEATURES_append = " systemd"
 # Add the domoticz to the final generated image :
 IMAGE_INSTALL_append = " domoticz"
 
-# Additionnal customizations can be installed (optional) :
-IMAGE_INSTALL_append = " custom-domoticz-scripts custom-iptables-rules"
-
 ```
 
 # II. recipes description
@@ -64,21 +60,3 @@ IMAGE_INSTALL_append = " custom-domoticz-scripts custom-iptables-rules"
   Also :
   * Adds initscript (systemd based) to launch domoticz.
   * Creates a dedicated user & group
-
-
-## recipes-custom/custom-domoticz-scripts
-
-  Adds my custom scripts :
-  - get the edf tempo color for next day
-  - read the values of the electrical counter (using WiFinfo - https://hallard.me/wifinfo/)
-
-## recipes-custom/custom-iptables-rules
-
-  Add custom iptables rules :
-  - keep ssh
-  - keep domoticz
-  Also adds iptables-persistent startup script (systemd based)
-
-## recipes-custom/jq
-
-  Add the jq tool, used by the custom-domoticz-scripts recipe, to parse json (see https://stedolan.github.io/jq/)
